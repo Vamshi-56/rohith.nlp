@@ -1,263 +1,917 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Photography Showcase</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | Rohith Photography</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #111;
-      color: #fff;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
       overflow-x: hidden;
-    }
-
-    .slider-container {
-      width: 100%;
-      overflow: hidden;
-      background-color: #000;
-    }
-
-    .slider {
-      display: flex;
-      animation: slide 30s linear infinite;
-    }
-
-    .slide {
       position: relative;
-      min-width: 100%;
-      height: 400px;
     }
 
-    .slide img {
+    /* Animated SVG BG */
+    body::before {
+      content: "";
+      position: fixed;
       width: 100%;
-      height: 400px;
-      object-fit: cover;
-      filter: brightness(70%);
+      height: 100%;
+      background: linear-gradient(135deg, #000000, #1a1a1a);
+      z-index: -2;
     }
 
-    .slide h2 {
-      position: absolute;
-      bottom: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #fff;
-      font-size: 2rem;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 10px 20px;
-      border-radius: 10px;
-      animation: dropUp 1s forwards;
-      animation-delay: 1s;
+    svg.bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
     }
 
-    @keyframes dropUp {
-      to {
-        bottom: 30px;
-        opacity: 1;
-      }
-    }
-
-    @keyframes slide {
-      0% { transform: translateX(0); }
-      20% { transform: translateX(-100%); }
-      40% { transform: translateX(-200%); }
-      60% { transform: translateX(-300%); }
-      80% { transform: translateX(-400%); }
-      100% { transform: translateX(0); }
-    }
-
-    .contact-section {
-      background-color: #1a1a1a;
-      padding: 40px 20px;
-    }
-
-    .contact-section h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 2.5rem;
-      color: #ff416c;
-    }
-
-    .contact-form {
-      max-width: 600px;
-      margin: 0 auto;
-      background: #222;
+    header {
       padding: 30px;
-      border-radius: 10px;
-    }
-
-    .contact-form label {
-      display: block;
-      margin-top: 15px;
+      text-align: center;
+      font-size: 36px;
       font-weight: bold;
+      color: #fff;
+      background-color: rgba(0,0,0,0.4);
     }
 
-    .contact-form input,
-    .contact-form select,
-    .contact-form textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: none;
-      font-size: 1rem;
-      background-color: #333;
+    .autotype {
+      text-align: center;
+      font-size: 22px;
+      color: #ffd700;
+      margin: 20px;
+      height: 30px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+      gap: 30px;
+      z-index: 1;
+    }
+
+    .info, .form {
+      flex: 1;
+      min-width: 320px;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(8px);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
       color: #fff;
     }
 
-    .contact-form button {
-      margin-top: 20px;
+    h2 {
+      margin-bottom: 15px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+
+    form input, form textarea, form select {
       width: 100%;
       padding: 12px;
-      background-color: #ff416c;
+      margin: 12px 0;
       border: none;
-      border-radius: 5px;
-      font-size: 1.1rem;
-      color: white;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    form button {
+      padding: 12px 20px;
+      background: #f39c12;
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      color: #fff;
+      border-radius: 6px;
       cursor: pointer;
+      transition: background 0.3s;
     }
 
-    .contact-form button:hover {
-      background-color: #ff8a00;
+    form button:hover {
+      background: #e67e22;
     }
 
-    /* Media Queries */
-    @media (max-width: 768px) {
-      .slide h2 {
-        font-size: 1.5rem;
-        padding: 8px 16px;
-      }
-
-      .contact-section h2 {
-        font-size: 2rem;
-      }
-
-      .contact-form {
-        padding: 20px;
-      }
-
-      .contact-form input,
-      .contact-form select,
-      .contact-form textarea {
-        font-size: 0.95rem;
-      }
-
-      .contact-form button {
-        font-size: 1rem;
-        padding: 10px;
-      }
+    .extra {
+      padding: 30px;
+      color: #f5f5f5;
     }
 
-    @media (max-width: 480px) {
-      .slide h2 {
-        font-size: 1.2rem;
-        padding: 6px 12px;
+    .map-container {
+      width: 100%;
+      height: 400px;
+      margin-top: 30px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    }
+
+    .socials {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .socials a {
+      color: #fff;
+      font-size: 24px;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    /* Footer section */
+    .pg-footer {
+      background: #2c3e50;
+      padding: 40px 0;
+      color: #ecf0f1;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-content-column {
+      flex: 1;
+      margin-right: 20px;
+    }
+
+    .footer-logo h1 {
+      color: #f39c12;
+    }
+
+    .footer-menu h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .footer-menu-list li {
+      margin: 10px 0;
+    }
+
+    .footer-menu-list a {
+      color: #ecf0f1;
+      text-decoration: none;
+    }
+
+    .footer-wave-svg {
+      width: 100%;
+      height: 100px;
+    }
+
+    .footer-logo img {
+      max-width: 150px;
+    }
+
+    @media(max-width: 768px) {
+      .footer-content {
+        flex-direction: column;
+        align-items: center;
       }
 
-      .contact-section h2 {
-        font-size: 1.8rem;
-      }
-
-      .contact-form {
-        padding: 15px;
-      }
-
-      .contact-form input,
-      .contact-form select,
-      .contact-form textarea {
-        font-size: 0.9rem;
-      }
-
-      .contact-form button {
-        font-size: 0.95rem;
-        padding: 8px;
+      .footer-content-column {
+        margin-right: 0;
+        margin-bottom: 20px;
       }
     }
+/* footer section */
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  color: #fff;
+  text-decoration: none;
+}
+.pg-footer {
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.footer {
+    background-color: #004658;
+    color: #fff;
+}
+.footer-wave-svg {
+    background-color: transparent;
+    display: block;
+    height: 30px;
+    position: relative;
+    top: -1px;
+    width: 100%;
+}
+.footer-wave-path {
+    fill: #fffff2;
+}
+
+.footer-content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1230px;
+    padding: 40px 15px 450px;
+    position: relative;
+}
+
+.footer-content-column {
+    box-sizing: border-box;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    color: #fff;
+}
+
+.footer-content-column ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-logo-link {
+    display: inline-block;
+}
+.footer-menu {
+    margin-top: 30px;
+}
+
+.footer-menu-name {
+    color: #fffff2;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: .1em;
+    line-height: 18px;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+.footer-menu-list {
+    list-style: none;
+    margin-bottom: 0;
+    margin-top: 10px;
+    padding-left: 0;
+}
+.footer-menu-list li {
+    margin-top: 5px;
+}
+
+.footer-call-to-action-description {
+    color: #fffff2;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.footer-call-to-action-button:hover {
+    background-color: #fffff2;
+    color: #00bef0;
+}
+.button:last-of-type {
+    margin-right: 0;
+}
+.footer-call-to-action-button {
+    background-color: #027b9a;
+    border-radius: 21px;
+    color: #fffff2;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .1em;
+    line-height: 18px;
+    padding: 12px 30px;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color .2s;
+    cursor: pointer;
+    position: relative;
+}
+.footer-call-to-action {
+    margin-top: 30px;
+}
+.footer-call-to-action-title {
+    color: #fffff2;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: .1em;
+    line-height: 18px;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+.footer-call-to-action-link-wrapper {
+    margin-bottom: 0;
+    margin-top: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+.footer-call-to-action-link-wrapper a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+
+
+
+.footer-social-links {
+    bottom: 0;
+    height: 54px;
+    position: absolute;
+    right: 0;
+    width: 236px;
+}
+
+.footer-social-amoeba-svg {
+    height: 54px;
+    left: 0;
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 236px;
+}
+
+.footer-social-amoeba-path {
+    fill: #027b9a;
+}
+
+.footer-social-link.linkedin {
+    height: 26px;
+    left: 3px;
+    top: 11px;
+    width: 26px;
+}
+
+.footer-social-link {
+    display: block;
+    padding: 10px;
+    position: absolute;
+}
+
+.hidden-link-text {
+    position: absolute;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px,1px,1px,1px);
+    -webkit-clip-path: inset(0px 0px 99.9% 99.9%);
+    clip-path: inset(0px 0px 99.9% 99.9%);
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    padding: 0;
+    border: 0;
+    top: 50%;
+}
+
+.footer-social-icon-svg {
+    display: block;
+}
+
+.footer-social-icon-path {
+    fill: #fffff2;
+    transition: fill .2s;
+}
+
+.footer-social-link.twitter {
+    height: 28px;
+    left: 62px;
+    top: 3px;
+    width: 28px;
+}
+
+.footer-social-link.youtube {
+    height: 24px;
+    left: 123px;
+    top: 12px;
+    width: 24px;
+}
+
+.footer-social-link.github {
+    height: 34px;
+    left: 172px;
+    top: 7px;
+    width: 34px;
+}
+
+.footer-copyright {
+    background-color: #027b9a;
+    color: #fff;
+    padding: 15px 30px;
+  text-align: center;
+}
+
+.footer-copyright-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+}
+
+.footer-copyright-text {
+  color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.footer-copyright-link {
+    color: #fff;
+    text-decoration: none;
+}
+/* Media Query For different screens */
+@media (min-width:320px) and (max-width:479px)  { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+  .footer-content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1230px;
+    padding: 40px 15px 1050px;
+    position: relative;
+  }
+}
+@media (min-width:480px) and (max-width:599px)  { /* smartphones, Android phones, landscape iPhone */
+  .footer-content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1230px;
+    padding: 40px 15px 1050px;
+    position: relative;
+  }
+}
+@media (min-width:600px) and (max-width: 800px)  { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+  .footer-content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1230px;
+    padding: 40px 15px 1050px;
+    position: relative;
+  }
+}
+@media (min-width:801px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */
+
+}
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */
+
+}
+@media (min-width:1281px) { /* hi-res laptops and desktops */
+
+}
+@media (min-width: 760px) {
+  .footer-content {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 1230px;
+      padding: 40px 15px 450px;
+      position: relative;
+  }
+
+  .footer-wave-svg {
+      height: 50px;
+  }
+
+  .footer-content-column {
+      width: 24.99%;
+  }
+}
+@media (min-width: 568px) {
+  /* .footer-content-column {
+      width: 49.99%;
+  } */
+}
+ /* Logo Image */
+ .footer-logo img {
+      width: 100%;
+      max-width: 200px;
+      height:200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .footer-menu-name {
+  position: relative;
+  padding-bottom: 10px;
+  font-size: 22px;
+  color: #fff;
+}
+
+.footer-menu-name::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 50px;
+  background: #ff416c;
+  animation: underline 2s infinite alternate;
+}
+
+@keyframes underline {
+  0% {
+    width: 50px;
+  }
+  100% {
+    width: 100px;
+  }
+}
+.footer-call-to-action-title {
+  position: relative;
+  padding-bottom: 10px;
+  font-size: 22px;
+  color: #fff;
+}
+
+.footer-call-to-action-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 50px;
+  background: #ff416c;
+  animation: underline 2s infinite alternate;
+}
+
+@keyframes underline {
+  0% {
+    width: 50px;
+  }
+  100% {
+    width: 100px;
+  }
+}
+.footer-menu-list li a i {
+  margin-right: 8px;
+  color: #ff416c;
+  transition: transform 0.3s;
+}
+
+.footer-menu-list li a:hover i {
+  transform: scale(1.2);
+}
+
+.footer-call-to-action-title i {
+  margin-right: 8px;
+  color: #ff416c;
+}
+
+.footer-call-to-action-link {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  display: inline-block;
+  background-color: #ff416c;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.footer-call-to-action-link:hover {
+  background-color: #ff6381;
+}
+/* Zoom effect for the .info section on hover */
+.info:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+  cursor: pointer; /* Change cursor to pointer */
+  transition: transform 0.3s ease-in-out; /* Smooth zoom transition */
+}
+/* Zoom effect for the .info section on hover */
+.form:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+  cursor: pointer; /* Change cursor to pointer */
+  transition: transform 0.3s ease-in-out; /* Smooth zoom transition */
+}
+
+.extra {
+  max-width: 800px; /* Set a maximum width for better alignment */
+  margin: 0 auto; /* Center the content horizontally */
+  padding: 20px; /* Add padding inside the container */
+  font-family: Arial, sans-serif; /* Set a clean font family */
+  line-height: 1.6; /* Increase line height for readability */
+}
+
+.extra h3 {
+  font-size: 24px; /* Make h3 headings larger */
+  margin-bottom: 15px; /* Add some space below headings */
+  color: #333; /* Dark color for headings */
+}
+
+.extra ul {
+  list-style: none; /* Remove default list bullets */
+  padding-left: 0; /* Remove default padding */
+  margin-bottom: 20px; /* Add space below the list */
+}
+
+.extra ul li {
+  margin-bottom: 10px; /* Space between each list item */
+  font-size: 16px; /* Adjust font size */
+  color: #555; /* Lighter color for the list text */
+}
+
+.extra p {
+  font-size: 16px; /* Set the font size for paragraphs */
+  color: #555; /* Lighter color for paragraph text */
+  margin-bottom: 10px; /* Add space between FAQ questions and answers */
+}
+
+.extra b {
+  font-weight: bold; /* Make the questions and answers bold */
+}
+
+
+@keyframes colorChange {
+  0% {
+    color: #ff0000; /* Red */
+  }
+  15%{
+    color: white;
+  }
+  25% {
+    color: #ff9900; /* Orange */
+  }
+  50% {
+    color: #33cc33; /* Green */
+  }
+  75% {
+    color: #3399ff; /* Blue */
+  }
+  100% {
+    color: #ff00cc; /* Pink */
+  }
+}
+
+header {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  font-size: 24px;
+  font-weight: bold;
+  animation: colorChange 5s infinite; /* Apply the animation */
+}
+
+header img {
+  height: 40px;
+  margin-left: 10px;
+}
+
+
   </style>
 </head>
 <body>
 
-  <!-- Slider -->
-  <div class="slider-container">
-    <div class="slider">
-      <div class="slide">
-        <img src="https://img.freepik.com/premium-photo/professional-wedding-photographer-taking-pictures-bride-groom-nature-autumn_114963-19970.jpg" alt="Wedding">
-        <h2>Wedding Photography</h2>
-      </div>
-      <div class="slide">
-        <img src="https://jdinstituteoffashiontechnology.b-cdn.net/wp-content/uploads/2021/07/Types-of-Fashion-Photography-Thumbnail.jpg" alt="Fashion">
-        <h2>Fashion Photography</h2>
-      </div>
-      <div class="slide">
-        <img src="https://static.wixstatic.com/media/23d57d_e85a0f1273ab4108a3a5eaa611419e24~mv2.png" alt="Street">
-        <h2>Street Photography</h2>
-      </div>
-      <div class="slide">
-        <img src="https://static.vecteezy.com/system/resources/previews/054/902/258/non_2x/woman-capturing-wildlifes-during-safari-at-sunset-surrounded-by-nature-beauty-photo.jpeg" alt="Wildlife">
-        <h2>Wildlife Photography</h2>
-      </div>
-      <div class="slide">
-        <img src="https://cdn.fstoppers.com/styles/large-16-9/s3/lead/2022/12/fstoppers-product-guide-lead.jpg" alt="Product">
-        <h2>Product Photography</h2>
-      </div>
-    </div>
+<svg class="bg" viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#ff4d4d" fill-opacity="0.3">
+    <animate attributeName="d" dur="10s" repeatCount="indefinite"
+      values="
+        M0,192L60,181.3C120,171,240,149,360,144C480,139,600,149,720,154.7C840,160,960,160,1080,149.3C1200,139,1320,117,1380,106.7L1440,96V0H1380C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0H0Z;
+        M0,160L60,165.3C120,171,240,149,360,154.7C480,160,600,192,720,197.3C840,203,960,181,1080,176C1200,171,1320,181,1380,186.7L1440,192V0H1380C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0H0Z;
+        M0,192L60,181.3C120,171,240,149,360,144C480,139,600,149,720,154.7C840,160,960,160,1080,149.3C1200,139,1320,117,1380,106.7L1440,96V0H1380C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0H0Z
+      " />
+  </path>
+</svg>  
+
+<header>
+  Contact Rohith Photography
+  <img src="logo.png" alt="Contact with Rohith.NLP" style="height: 40px; margin-left: 10px;">
+</header>
+<div class="autotype" id="autotypeText"></div>
+
+<div class="container">
+  <div class="info">
+    <h2>Let’s Connect!</h2>
+    <ul>
+      <li>📍 Bangalore, India</li>
+      <li>📞 +91 98765 43210</li>
+      <li>✉️ contact@rohithphotography.com</li>
+    </ul>
+
+    <h2>Working Hours</h2>
+    <ul>
+      <li>Mon–Fri: 10am – 6pm</li>
+      <li>Sat–Sun: Appointments Only</li>
+    </ul>
   </div>
 
-  <!-- Contact Form -->
-  <div class="contact-section">
-    <h2>Book Your Shoot</h2>
-    <form class="contact-form" id="contactForm">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" required>
-
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="mobile">Mobile Number</label>
-      <input type="tel" id="mobile" name="mobile" required>
-
-      <label for="gender">Gender</label>
-      <select id="gender" name="gender" required>
-        <option value="">-- Select --</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
+  <div class="form">
+    <h2>Send Us a Message</h2>
+    <form id="contactForm">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <select required>
+        <option disabled selected>Select Service</option>
+        <option>Wedding Photography</option>
+        <option>Fashion Portfolio</option>
+        <option>Product Shoot</option>
       </select>
-
-      <label for="shootType">Type of Shoot</label>
-      <select id="shootType" name="shootType" required>
-        <option value="">-- Select --</option>
-        <option value="wedding">Wedding</option>
-        <option value="fashion">Fashion</option>
-        <option value="street">Street</option>
-        <option value="product">Product</option>
-        <option value="wildlife">Wildlife</option>
-        <option value="portrait">Portrait</option>
-        <option value="event">Event</option>
-      </select>
-
-      <label for="location">Shoot Location</label>
-      <select id="location" name="location" required>
-        <option value="">-- Select --</option>
-        <option value="indoor">Indoor</option>
-        <option value="outdoor">Outdoor</option>
-        <option value="studio">Studio</option>
-      </select>
-
-      <label for="message">Additional Details</label>
-      <textarea id="message" name="message" rows="4" placeholder="Mention your preferences, date, location, etc."></textarea>
-
-      <button type="submit">Send Inquiry</button>
+      <textarea rows="5" placeholder="Write your message..." required></textarea>
+      <button type="submit">Send Message</button>
+      <div id="successMsg" style="text-align:center; color: lightgreen;"></div>
     </form>
   </div>
+</div>
 
-  <script>
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert("Thank you! We'll contact you soon.");
-      this.reset();
-    });
-  </script>
+<div class="extra">
+  <h3>📋 Our Photography Services</h3>
+  <ul>
+    <li><b>Wedding Photography:</b> Artistic storytelling with candid and traditional styles.</li>
+    <li><b>Fashion Shoots:</b> Magazine-style portfolio builds for professionals.</li>
+    <li><b>Product Shoots:</b> Eye-catching photos tailored for e-commerce & brands.</li>
+  </ul>
+
+  <h3>💬 FAQs</h3>
+  <p><b>Q:</b> Do you offer outstation shoots?<br><b>A:</b> Yes! We’re available across India.</p>
+  <p><b>Q:</b> Can I see sample photos?<br><b>A:</b> Absolutely! Please check our gallery.</p>
+</div>
+
+<!-- Map Section -->
+<div class="map-container">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11460.040952562852!2d77.58918299305127!3d12.971598535212178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae145bfbf79b67%3A0x0!2zMTInMDQ0Ojo2OjUwNDEtNzA2MzE5Mzc!5e0!3m2!1sen!2sin!4v1619750138993!5m2!1sen!2sin"
+    frameborder="0" style="border:0; width: 100%; height: 100%;"></iframe>
+</div>
+
+<!-- Footer -->
+
+  <!-- fotter section -->
+  <div class="pg-footer">
+    <footer class="footer">
+      <svg class="footer-wave-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100" preserveAspectRatio="none">
+        <path class="footer-wave-path" d="M851.8,100c125,0,288.3-45,348.2-64V0H0v44c3.7-1,7.3-1.9,11-2.9C80.7,22,151.7,10.8,223.5,6.3C276.7,2.9,330,4,383,9.8 c52.2,5.7,103.3,16.2,153.4,32.8C623.9,71.3,726.8,100,851.8,100z"></path>
+      </svg>
+      <div class="footer-content">
+        <div class="footer-content-column">
+          <div class="footer-logo">
+            <a class="footer-logo-link" href="#">
+              <span class="hidden-link-text">LOGO</span>
+              <h1>LOGO</h1>
+              <img src="logo.png" alt="Photography Logo" />
+            </a>
+          </div>
+          <div class="footer-menu">
+            <!-- <h2 class="footer-menu-name"> </h2> -->
+            
+            </ul>
+          </div>
+        </div>
+        <div class="footer-content-column">
+          <div class="footer-menu">
+            <h2 class="footer-menu-name"> Company</h2>
+            <ul id="menu-company" class="footer-menu-list">
+              <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                <a href="#">Contact</a>
+              </li>
+              <li class="menu-item menu-item-type-taxonomy menu-item-object-category">
+                <a href="#">News</a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                <a href="#">Careers</a>
+              </li>
+            </ul>
+          </div>
+
+          
+          <div class="footer-menu">
+            <h2 class="footer-menu-name"> Legal</h2>
+            <ul id="menu-legal" class="footer-menu-list">
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-170434">
+                <a href="#">Privacy Notice</a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                <a href="#">Terms of Use</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-content-column">
+          <div class="footer-menu">
+            <h2 class="footer-menu-name"> Quick Links</h2>
+            <ul id="menu-quick-links" class="footer-menu-list">
+              <li class="menu-item">
+                <a href="#"><i class="fas fa-home"></i> Home</a>
+              </li>
+              <li class="menu-item">
+                <a href="#"><i class="fas fa-info-circle"></i> About</a>
+              </li>
+              <li class="menu-item">
+                <a href="#"><i class="fas fa-image"></i> Gallery</a>
+              </li>
+              <li class="menu-item">
+                <a href="#"><i class="fas fa-blog"></i> Blog</a>
+              </li>
+              <li class="menu-item">
+                <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+              </li>
+            </ul>
+            
+          </div>
+        </div>
+        <div class="footer-content-column">
+          <div class="footer-call-to-action">
+            <h2 class="footer-call-to-action-title"> Let's Chat</h2>
+            <p class="footer-call-to-action-description"> Have a support question?</p>
+            <a class="footer-call-to-action-button button" href="#" target="_self"> Get in Touch </a>
+          </div>
+          <div class="footer-call-to-action">
+            <h2 class="footer-call-to-action-title">
+              <i class="fas fa-phone-alt"></i> You Call Us
+            </h2>
+            <p class="footer-call-to-action-link-wrapper">
+              <a class="footer-call-to-action-link" href="tel:9740903811" target="_self">
+                +91 9740903811
+              </a>
+            </p>
+          </div>
+        </div>
+        <div class="footer-social-links"> <svg class="footer-social-amoeba-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 236 54">
+            <path class="footer-social-amoeba-path" d="M223.06,43.32c-.77-7.2,1.87-28.47-20-32.53C187.78,8,180.41,18,178.32,20.7s-5.63,10.1-4.07,16.7-.13,15.23-4.06,15.91-8.75-2.9-6.89-7S167.41,36,167.15,33a18.93,18.93,0,0,0-2.64-8.53c-3.44-5.5-8-11.19-19.12-11.19a21.64,21.64,0,0,0-18.31,9.18c-2.08,2.7-5.66,9.6-4.07,16.69s.64,14.32-6.11,13.9S108.35,46.5,112,36.54s-1.89-21.24-4-23.94S96.34,0,85.23,0,57.46,8.84,56.49,24.56s6.92,20.79,7,24.59c.07,2.75-6.43,4.16-12.92,2.38s-4-10.75-3.46-12.38c1.85-6.6-2-14-4.08-16.69a21.62,21.62,0,0,0-18.3-9.18C13.62,13.28,9.06,19,5.62,24.47A18.81,18.81,0,0,0,3,33a21.85,21.85,0,0,0,1.58,9.08,16.58,16.58,0,0,1,1.06,5A6.75,6.75,0,0,1,0,54H236C235.47,54,223.83,50.52,223.06,43.32Z"></path>
+          </svg>
+          <a class="footer-social-link linkedin" href="https://www.linkedin.com/in/rohith-kumar-sr-a441011b5/" target="_blank">
+            <span class="hidden-link-text">Linkedin</span>
+            <svg class="footer-social-icon-svg" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 30 30" style="height: 20px; height: 20px;">
+              <path class="footer-social-icon-path" d="M9,25H4V10h5V25z M6.501,8C5.118,8,4,6.879,4,5.499S5.12,3,6.501,3C7.879,3,9,4.121,9,5.499C9,6.879,7.879,8,6.501,8z M27,25h-4.807v-7.3c0-1.741-0.033-3.98-2.499-3.98c-2.503,0-2.888,1.896-2.888,3.854V25H12V9.989h4.614v2.051h0.065 c0.642-1.18,2.211-2.424,4.551-2.424c4.87,0,5.77,3.109,5.77,7.151C27,16.767,27,25,27,25z"></path>
+            </svg>
+          </a>
+          <a class="footer-social-link twitter" href="#" target="_blank">
+            <span class="hidden-link-text">Twitter</span>
+            <svg style="height: 20px; height: 20px;" class="footer-social-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" >
+              <path class="footer-social-icon-path" d="M 25.855469 5.574219 C 24.914063 5.992188 23.902344 6.273438 22.839844 6.402344 C 23.921875 5.75 24.757813 4.722656 25.148438 3.496094 C 24.132813 4.097656 23.007813 4.535156 21.8125 4.769531 C 20.855469 3.75 19.492188 3.113281 17.980469 3.113281 C 15.082031 3.113281 12.730469 5.464844 12.730469 8.363281 C 12.730469 8.773438 12.777344 9.175781 12.867188 9.558594 C 8.503906 9.339844 4.636719 7.246094 2.046875 4.070313 C 1.59375 4.847656 1.335938 5.75 1.335938 6.714844 C 1.335938 8.535156 2.261719 10.140625 3.671875 11.082031 C 2.808594 11.054688 2 10.820313 1.292969 10.425781 C 1.292969 10.449219 1.292969 10.46875 1.292969 10.492188 C 1.292969 13.035156 3.101563 15.15625 5.503906 15.640625 C 5.0625 15.761719 4.601563 15.824219 4.121094 15.824219 C 3.78125 15.824219 3.453125 15.792969 3.132813 15.730469 C 3.800781 17.8125 5.738281 19.335938 8.035156 19.375 C 6.242188 20.785156 3.976563 21.621094 1.515625 21.621094 C 1.089844 21.621094 0.675781 21.597656 0.265625 21.550781 C 2.585938 23.039063 5.347656 23.90625 8.3125 23.90625 C 17.96875 23.90625 23.25 15.90625 23.25 8.972656 C 23.25 8.742188 23.246094 8.515625 23.234375 8.289063 C 24.261719 7.554688 25.152344 6.628906 25.855469 5.574219 "></path>
+            </svg>
+          </a>
+          <a class="footer-social-link youtube" href="https://www.youtube.com/@rohithnlp7680" target="_blank">
+            <span class="hidden-link-text">Youtube</span>
+            <svg style="height: 20px; height: 20px;" class="footer-social-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+              <path class="footer-social-icon-path" d="M 15 4 C 10.814 4 5.3808594 5.0488281 5.3808594 5.0488281 L 5.3671875 5.0644531 C 3.4606632 5.3693645 2 7.0076245 2 9 L 2 15 L 2 15.001953 L 2 21 L 2 21.001953 A 4 4 0 0 0 5.3769531 24.945312 L 5.3808594 24.951172 C 5.3808594 24.951172 10.814 26.001953 15 26.001953 C 19.186 26.001953 24.619141 24.951172 24.619141 24.951172 L 24.621094 24.949219 A 4 4 0 0 0 28 21.001953 L 28 21 L 28 15.001953 L 28 15 L 28 9 A 4 4 0 0 0 24.623047 5.0546875 L 24.619141 5.0488281 C 24.619141 5.0488281 19.186 4 15 4 z M 12 10.398438 L 20 15 L 12 19.601562 L 12 10.398438 z"></path>
+            </svg>
+          </a>
+          <a class="footer-social-link github" href="#" target="_blank">
+            <span class="hidden-link-text">Github</span>
+            <svg style="height: 20px; height: 20px;" class="footer-social-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+              <path class="footer-social-icon-path" d="M 16 4 C 9.371094 4 4 9.371094 4 16 C 4 21.300781 7.4375 25.800781 12.207031 27.386719 C 12.808594 27.496094 13.027344 27.128906 13.027344 26.808594 C 13.027344 26.523438 13.015625 25.769531 13.011719 24.769531 C 9.671875 25.492188 8.96875 23.160156 8.96875 23.160156 C 8.421875 21.773438 7.636719 21.402344 7.636719 21.402344 C 6.546875 20.660156 7.71875 20.675781 7.71875 20.675781 C 8.921875 20.761719 9.554688 21.910156 9.554688 21.910156 C 10.625 23.746094 12.363281 23.214844 13.046875 22.910156 C 13.15625 22.132813 13.46875 21.605469 13.808594 21.304688 C 11.144531 21.003906 8.34375 19.972656 8.34375 15.375 C 8.34375 14.0625 8.8125 12.992188 9.578125 12.152344 C 9.457031 11.851563 9.042969 10.628906 9.695313 8.976563 C 9.695313 8.976563 10.703125 8.65625 12.996094 10.207031 C 13.953125 9.941406 14.980469 9.808594 16 9.804688 C 17.019531 9.808594 18.046875 9.941406 19.003906 10.207031 C 21.296875 8.65625 22.300781 8.976563 22.300781 8.976563 C 22.957031 10.628906 22.546875 11.851563 22.421875 12.152344 C 23.191406 12.992188 23.652344 14.0625 23.652344 15.375 C 23.652344 19.984375 20.847656 20.996094 18.175781 21.296875 C 18.605469 21.664063 18.988281 22.398438 18.988281 23.515625 C 18.988281 25.121094 18.976563 26.414063 18.976563 26.808594 C 18.976563 27.128906 19.191406 27.503906 19.800781 27.386719 C 24.566406 25.796875 28 21.300781 28 16 C 28 9.371094 22.628906 4 16 4 Z "></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="footer-copyright-wrapper">
+          <p class="footer-copyright-text">
+            <a class="footer-copyright-link" href="#" target="_self"> ©2025. | Designed By: Rohith. | All rights reserved. </a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Footer Section ends -->
+</footer>
+
+<script>
+let autoText = ["Contact me for photography inquiries!", "Book a session today!"];
+  let index = 0;
+  let currentText = "";
+  let charIndex = 0;
+  let speed = 100; // Speed of typing in milliseconds
+  
+  function typeEffect() {
+    currentText = autoText[index];
+    let element = document.getElementById("autotypeText");
+    element.innerHTML = currentText.substring(0, charIndex);
+    element.style.color = "white"; // Set text color to white during typing effect
+  
+    if (charIndex < currentText.length) {
+      charIndex++;
+      setTimeout(typeEffect, speed);
+    } else {
+      setTimeout(() => {
+        charIndex = 0;
+        index = (index + 1) % autoText.length; // Move to the next text
+        typeEffect(); // Start typing the next text
+      }, 2000); // Wait for 2 seconds before starting the next text
+    }
+  }
+  
+  // Start the typing effect when the page loads
+  window.onload = () => {
+    typeEffect();
+  };
+  
+</script>
+
 
 </body>
 </html>
