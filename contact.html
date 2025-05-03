@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact | Rohith Photography</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
   <style>
     * {
       margin: 0;
@@ -138,64 +140,6 @@
       font-size: 24px;
       margin: 0 10px;
       text-decoration: none;
-    }
-
-    /* Footer section */
-    .pg-footer {
-      background: #2c3e50;
-      padding: 40px 0;
-      color: #ecf0f1;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .footer-content-column {
-      flex: 1;
-      margin-right: 20px;
-    }
-
-    .footer-logo h1 {
-      color: #f39c12;
-    }
-
-    .footer-menu h2 {
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-
-    .footer-menu-list li {
-      margin: 10px 0;
-    }
-
-    .footer-menu-list a {
-      color: #ecf0f1;
-      text-decoration: none;
-    }
-
-    .footer-wave-svg {
-      width: 100%;
-      height: 100px;
-    }
-
-    .footer-logo img {
-      max-width: 150px;
-    }
-
-    @media(max-width: 768px) {
-      .footer-content {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .footer-content-column {
-        margin-right: 0;
-        margin-bottom: 20px;
-      }
     }
 /* footer section */
 * {
@@ -609,7 +553,7 @@ a {
 .extra h3 {
   font-size: 24px; /* Make h3 headings larger */
   margin-bottom: 15px; /* Add some space below headings */
-  color: #333; /* Dark color for headings */
+  color: white; /* Dark color for headings */
 }
 
 .extra ul {
@@ -621,12 +565,12 @@ a {
 .extra ul li {
   margin-bottom: 10px; /* Space between each list item */
   font-size: 16px; /* Adjust font size */
-  color: #555; /* Lighter color for the list text */
+  color: white; /* Lighter color for the list text */
 }
 
 .extra p {
   font-size: 16px; /* Set the font size for paragraphs */
-  color: #555; /* Lighter color for paragraph text */
+  color: white; /* Lighter color for paragraph text */
   margin-bottom: 10px; /* Add space between FAQ questions and answers */
 }
 
@@ -687,46 +631,59 @@ header img {
 </svg>  
 
 <header>
-  Touch with Me
+  Contact Me
   <img src="logo.png" alt="Contact with Rohith.NLP" style="height: 40px; margin-left: 10px;">
 </header>
 <div class="autotype" id="autotypeText"></div>
 
 <div class="container">
-  <div class="info">
-    <h2>Let’s Connect!</h2>
-    <ul>
-      <li>📍 Bangalore, India</li>
-      <li>📞 +91 9740903811</li>
-      <li>✉️ rohithnlpme@gmail.com</li>
+  <div class="info" style="background: #111; color: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 0 15px rgba(255,255,255,0.1); transition: transform 0.3s ease;">
+    <h2 style="color: #ffd700;">✨ Let’s Connect!</h2>
+    <ul style="list-style: none; padding: 0;">
+      <li><span style="color: #00ffff;">📍 Location:</span> Bangalore, India</li>
+      <li><span style="color: #00ffff;">📞 Phone:</span> +91 9740903811</li>
+      <li><span style="color: #00ffff;">✉️ Email:</span> rohithnlp.me@gmail.com</li>
     </ul>
-
-    <h2>Working Hours</h2>
-    <ul>
-      <li>Monday: 10am – 6pm</li>
-      <li>Tuesday: 10am – 6pm</li>
-      <li>wednesday: 10am – 6pm</li>
-      <li>Thursday: 10am – 6pm</li>
-      <li>Friday: 10am – 6pm</li>
-      <li>Sat–Sun: Appointments Only</li>
+  
+    <h2 style="color: #ffd700; margin-top: 20px;">🕐 Working Hours</h2>
+    <ul style="list-style: none; padding: 0;">
+      <li><strong>Monday – Friday:</strong> 10:00 AM – 6:00 PM</li>
+      <li><strong>Saturday – Sunday:</strong> Appointments Only</li>
+    </ul>
+  
+    <h2 style="color: #ffd700; margin-top: 20px;">📣 Why Choose Me?</h2>
+    <ul style="list-style: none; padding: 0;">
+      <li>✅ Over 10 years of professional photography experience</li>
+      <li>✅ Specialized in candid, wedding, and product photography</li>
+      <li>✅ Fast turnaround and top-notch quality</li>
+      <li>✅ Available for shoots across India</li>
     </ul>
   </div>
+  
 
   <div class="form">
-    <h2>Send Us a Message</h2>
-    <form id="contactForm">
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <select required>
+    <form action="https://api.web3forms.com/submit" method="POST" id="contactForm">
+      <h2>Send Us a Message</h2>
+    
+      <input type="hidden" name="access_key" value="a242567a-0d6b-4867-ab53-49c873f96c6d">
+    
+      <input type="text" name="first_name" placeholder="First Name" required />
+      <input type="text" name="last_name" placeholder="Last Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+    
+      <select name="service" required>
         <option disabled selected>Select Service</option>
         <option>Wedding Photography</option>
         <option>Fashion Portfolio</option>
         <option>Product Shoot</option>
       </select>
-      <textarea rows="5" placeholder="Write your message..." required></textarea>
+    
+      <textarea name="message" rows="5" placeholder="Write your message..." required></textarea>
+    
       <button type="submit">Send Message</button>
       <div id="successMsg" style="text-align:center; color: lightgreen;"></div>
     </form>
+    
   </div>
 </div>
 
@@ -806,19 +763,19 @@ header img {
             <h2 class="footer-menu-name"> Quick Links</h2>
             <ul id="menu-quick-links" class="footer-menu-list">
               <li class="menu-item">
-                <a href="#"><i class="fas fa-home"></i> Home</a>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
               </li>
               <li class="menu-item">
-                <a href="#"><i class="fas fa-info-circle"></i> About</a>
+                <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
               </li>
               <li class="menu-item">
                 <a href="#"><i class="fas fa-image"></i> Gallery</a>
               </li>
               <li class="menu-item">
-                <a href="#"><i class="fas fa-blog"></i> Blog</a>
+                <a href="blog.html"><i class="fas fa-blog"></i> Blog</a>
               </li>
               <li class="menu-item">
-                <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
               </li>
             </ul>
             
